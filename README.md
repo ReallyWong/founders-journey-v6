@@ -6,6 +6,19 @@
 
 ---
 
+## 🕰️ 经典版本 · Classic Editions
+
+像 CS 1.6 与 CS:GO 一样，每个里程碑版本都永久可玩——你可以亲手对比这 20 天它长成了什么：
+
+| 版本 | 里程碑 | 在线游玩 |
+|------|--------|----------|
+| **v2.2 · 最新版** | NPC 对话剧情 + 败局复盘 + 存档码 + 真实历史股市 | [🎮 立即游玩](https://reallywong.github.io/founders-journey-v6/) |
+| **v1.7ultra** | 旧版之王：刀尖起舞剧本 + 三重彩蛋解锁体系 | [🎮 游玩](https://reallywong.github.io/founders-journey-v17u/) |
+| **v1.7.5** | 资本寒冬窗口 + 三市场 IPO（美/港/A） | [🎮 游玩](https://reallywong.github.io/founders-journey-v75/) |
+| **v1.5.1** | 第一个「完整可玩」版：多轮融资 + 招聘系统 | [🎮 游玩](https://reallywong.github.io/founders-journey-v5/) |
+| **v1.x · 第一版** | 一切开始的地方：15 万启动资金，一局定生死 | [🎮 游玩](https://reallywong.github.io/founders-journey/) |
+
+
 ## 为什么是游戏，而不是案例集
 
 案例集告诉你「别人做了什么」，游戏让你**亲手做一遍、并承担后果**：
