@@ -1,0 +1,22 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const root=path.resolve(__dirname),out=path.join(root,'dist');
+const production=process.argv.includes('--production')||process.env.VERCEL_ENV==='production';
+const version='v2.3-office.1',asset='assets/index-DWOGtMQ4.js';
+const repair=require('./repair-engine.cjs')(fs.readFileSync(path.join(root,asset),'utf8'));
+let code=require('./office-view.cjs')(repair.code);code=require('./group-dashboard.cjs')(code);code=require('./new-game.cjs')(code);
+function once(a,b){if(code.split(a).length!==2)throw Error('Release anchor changed: '+a);code=code.replace(a,b)}
+once('im="v2.2"','im="'+version+'"');
+once('function U6(n){try{','function U6(n){if(!globalThis.FJ_RELEASE?.analytics)return;try{');
+once('function L6(n,a,c){try{','function L6(n,a,c){if(!globalThis.FJ_RELEASE?.analytics)return;try{');
+fs.mkdirSync(out,{recursive:true});for(const folder of ['assets','npcs','sfx'])fs.cpSync(path.join(root,folder),path.join(out,folder),{recursive:true});
+fs.writeFileSync(path.join(out,'assets/index-office.js'),code);fs.copyFileSync(path.join(root,'office-scene.js'),path.join(out,'assets/office-scene.js'));fs.copyFileSync(path.join(root,'office-theme.css'),path.join(out,'office-theme.css'));
+const config={version,environment:production?'production':'preview',analytics:production};
+fs.writeFileSync(path.join(out,'release-config.js'),'globalThis.FJ_RELEASE='+JSON.stringify(config)+';\n');
+let html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const connect=production?"connect-src 'self' https://tejyzdubrbiigouznaeh.supabase.co https://ntfy.sh":"connect-src 'self'";
+html=html.replace('<html lang="en">','<html lang="zh-CN">').replace('<head>','<head>\n<meta http-equiv="Content-Security-Policy" content="'+connect+'">\n<script src="./release-config.js"></script>\n<link rel="stylesheet" href="./office-theme.css">').replace('./assets/index-DWOGtMQ4.js','./assets/index-office.js');
+if(!production)html=html.replace('<body>','<body><div class="local-preview">FJ / 创业人生 · 办公室版 预览 <span>预览数据不上报正式统计</span></div>');
+fs.writeFileSync(path.join(out,'index.html'),html);
+for(const file of ['board.html','ops.html'])fs.copyFileSync(path.join(root,file),path.join(out,file));
+fs.writeFileSync(path.join(out,'release-manifest.json'),JSON.stringify({...config,baselineSha256:repair.baselineSha256,engineSha256:crypto.createHash('sha256').update(code).digest('hex'),patches:repair.applied},null,2));
+console.log('Built '+version+' ('+config.environment+'), analytics='+config.analytics);
