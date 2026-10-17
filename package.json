@@ -1,1 +1,13 @@
-{"name":"founders-journey-v6","version":"2.3.0","private":true,"scripts":{"build":"node build.cjs","test":"node test-engine.cjs && node test-release.cjs","preview":"node serve.cjs"},"engines":{"node":">=20"}}
+{
+  "name": "founders-journey-v6",
+  "version": "2.3.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.cjs",
+    "test": "node test-engine.cjs && node test-release.cjs && node test-securities.cjs",
+    "preview": "node serve.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
