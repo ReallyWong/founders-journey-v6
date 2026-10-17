@@ -1,9 +1,9 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname),out=path.join(root,'dist');
 const production=process.argv.includes('--production')||process.env.VERCEL_ENV==='production';
-const version='v2.3-office.1',asset='assets/index-DWOGtMQ4.js';
+const version='v2.3-office.2',asset='assets/index-DWOGtMQ4.js';
 const repair=require('./repair-engine.cjs')(fs.readFileSync(path.join(root,asset),'utf8'));
-let code=require('./office-view.cjs')(repair.code);code=require('./group-dashboard.cjs')(code);code=require('./new-game.cjs')(code);
+let code=require('./office-view.cjs')(repair.code);code=require('./group-dashboard.cjs')(code);code=require('./new-game.cjs')(code);code=require('./securities.cjs')(code);
 function once(a,b){if(code.split(a).length!==2)throw Error('Release anchor changed: '+a);code=code.replace(a,b)}
 once('im="v2.2"','im="'+version+'"');
 once('function U6(n){try{','function U6(n){if(!globalThis.FJ_RELEASE?.analytics)return;try{');
